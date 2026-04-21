@@ -548,7 +548,7 @@
     document.getElementById('progressBar').style.width = pct + '%';
   });
 
-  function handleSubmit() {
+  async function handleSubmit() {
     // Basic validation
     const required = ['firstName', 'lastName', 'company', 'role', 'learn', 'challenge', 'contribute'];
     let allGood = true;
@@ -568,11 +568,45 @@
       document.querySelector('[style*="borderColor"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    // Show success
-    document.getElementById('formSection').style.display = 'none';
-    const s = document.getElementById('successState');
-    s.classList.add('visible');
-    s.scrollIntoView({ behavior: 'smooth' });
+
+    const dietary = [...document.querySelectorAll('.diet-chip input:checked')].map(c => c.value).join(', ');
+    const otherDiet = document.getElementById('otherDiet').value.trim();
+
+    const data = {
+      'First name': document.getElementById('firstName').value,
+      'Last name': document.getElementById('lastName').value,
+      'Company': document.getElementById('company').value,
+      'Role title': document.getElementById('role').value,
+      'Seniority': document.getElementById('seniority').value,
+      'Hoping to learn': document.getElementById('learn').value,
+      'Current challenge': document.getElementById('challenge').value,
+      'Can help others with': document.getElementById('contribute').value,
+      'Dietary requirements': [dietary, otherDiet].filter(Boolean).join(', ') || 'None'
+    };
+
+    const btn = document.querySelector('.btn-submit');
+    btn.innerHTML = 'Submitting&hellip;';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mwvarkab', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        document.getElementById('formSection').style.display = 'none';
+        const s = document.getElementById('successState');
+        s.classList.add('visible');
+        s.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    } catch(e) {
+      btn.textContent = 'Something went wrong — please try again';
+      btn.disabled = false;
+    }
   }
 </script>
 </body>
