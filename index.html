@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Female Leadership Dinner — Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1C1A17;
+    --warm-mid: #8C7B6B;
+    --accent: #C9A96E;
+    --rust: #B85C38;
+    --surface: #F2EDE5;
+    --border: #DDD5C8;
+    --focus: #B85C38;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ——— HEADER ——— */
+  .header {
+    position: relative;
+    padding: 80px 40px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 320px; height: 320px;
+    background: radial-gradient(ellipse at center, rgba(201,169,110,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .header-eyebrow::before, .header-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 7vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .header-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .header-meta {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+  }
+  .meta-item strong {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+    margin: 36px auto;
+  }
+
+  .header-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #4A4035;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ——— FORM ——— */
+  .form-wrapper {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .field-group {
+    margin-bottom: 28px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 8px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(184,92,56,0.08);
+    background: #fff;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #B8AFAA;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 110px;
+    line-height: 1.65;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .char-hint {
+    font-size: 11px;
+    color: var(--warm-mid);
+    margin-top: 6px;
+    opacity: 0.8;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ——— DIETARY ——— */
+  .dietary-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .diet-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .diet-chip input[type="checkbox"] {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface);
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .diet-chip input[type="checkbox"]:checked {
+    background: var(--rust);
+    border-color: var(--rust);
+  }
+  .diet-chip input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 4px;
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(40deg);
+  }
+
+  /* ——— SUBMIT ——— */
+  .submit-area {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .submit-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--warm-mid);
+    font-style: italic;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 16px 44px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover {
+    background: var(--rust);
+    transform: translateY(-1px);
+  }
+  .btn-submit:active { transform: translateY(0); }
+
+  .btn-arrow {
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+  .btn-submit:hover .btn-arrow { transform: translateX(4px); }
+
+  /* ——— SUCCESS STATE ——— */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .success-state.visible { display: block; }
+  .success-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .success-body {
+    font-size: 15px;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  /* ——— FOOTER ——— */
+  .footer {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    text-align: center;
+  }
+  .footer-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 500;
+  }
+  .footer-logos span { opacity: 0.5; }
+  .footer-fine {
+    font-size: 11px;
+    color: var(--warm-mid);
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+
+  /* ——— PROGRESS BAR ——— */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--rust));
+    transition: width 0.3s ease;
+    z-index: 100;
+  }
+
+  /* ——— ANIMATIONS ——— */
+  .field-group {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .field-group:nth-child(1) { animation-delay: 0.1s; }
+  .field-group:nth-child(2) { animation-delay: 0.15s; }
+  .field-group:nth-child(3) { animation-delay: 0.2s; }
+  .field-group:nth-child(4) { animation-delay: 0.25s; }
+  .field-group:nth-child(5) { animation-delay: 0.3s; }
+  .field-group:nth-child(6) { animation-delay: 0.35s; }
+  .field-group:nth-child(7) { animation-delay: 0.4s; }
+  .section-label { animation: fadeUp 0.4s ease both; }
+
+  @media (max-width: 520px) {
+    .field-row { grid-template-columns: 1fr; }
+    .header { padding: 60px 24px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-eyebrow">An evening with Convert</div>
+  <h1 class="header-title">Becoming &amp;<br><em>being</em> a female leader</h1>
+
+  <div class="header-meta">
+    <div class="meta-item">Date<strong>5 May 2025</strong></div>
+    <div class="meta-item">Time<strong>6:00 – 9:00 pm</strong></div>
+    <div class="meta-item">Format<strong>Dinner &amp; conversation</strong></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="header-description">
+    An intimate, curated evening for mid–senior women in experimentation, growth, product, and leadership. 
+    Lightly structured, peer-to-peer, and focused on what it actually means to lead.
+    Attendees are selected based on what they hope to learn and what they bring to the room.
+  </p>
+</header>
+
+<!-- FORM -->
+<main class="form-wrapper" id="formSection">
+
+  <div class="section-label">About you</div>
+
+  <div class="field-group">
+    <div class="field-row">
+      <div>
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" placeholder="Your first name" autocomplete="given-name">
+      </div>
+      <div>
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" placeholder="Your last name" autocomplete="family-name">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <div class="field-row">
+      <div>
+        <label for="company">Company</label>
+        <input type="text" id="company" placeholder="Where you work">
+      </div>
+      <div>
+        <label for="seniority">Current role / seniority</label>
+        <select id="seniority">
+          <option value="" disabled selected>Select level</option>
+          <option>Mid-level (individual contributor)</option>
+          <option>Senior (individual contributor)</option>
+          <option>Lead / Manager</option>
+          <option>Director</option>
+          <option>VP / Head of</option>
+          <option>C-Suite / Founder</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label for="role">Role title</label>
+    <input type="text" id="role" placeholder="e.g. Senior Product Manager, Head of Growth…">
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-label">Your conversation</div>
+
+  <div class="field-group">
+    <label for="learn">What are you hoping to learn from others?</label>
+    <textarea id="learn" placeholder="What questions are you sitting with right now? What wisdom are you looking for?"></textarea>
+    <p class="char-hint">Be specific — this helps us shape seating and introductions.</p>
+  </div>
+
+  <div class="field-group">
+    <label for="challenge">What challenge are you currently facing?</label>
+    <textarea id="challenge" placeholder="e.g. growing within your company, managing up, navigating a male-dominated environment, stepping into leadership…"></textarea>
+  </div>
+
+  <div class="field-group">
+    <label for="contribute">What could you help others with?</label>
+    <textarea id="contribute" placeholder="e.g. experience you've gained, lessons learned, a perspective you've hard-won…"></textarea>
+    <p class="char-hint">This could be professional or personal — both matter here.</p>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-label">A few practical things</div>
+
+  <div class="field-group">
+    <label>Dietary requirements or allergies</label>
+    <div class="dietary-options">
+      <label class="diet-chip"><input type="checkbox" value="vegetarian"> Vegetarian</label>
+      <label class="diet-chip"><input type="checkbox" value="vegan"> Vegan</label>
+      <label class="diet-chip"><input type="checkbox" value="gluten-free"> Gluten-free</label>
+      <label class="diet-chip"><input type="checkbox" value="dairy-free"> Dairy-free</label>
+      <label class="diet-chip"><input type="checkbox" value="nut-allergy"> Nut allergy</label>
+      <label class="diet-chip"><input type="checkbox" value="halal"> Halal</label>
+      <label class="diet-chip"><input type="checkbox" value="kosher"> Kosher</label>
+    </div>
+    <label for="otherDiet" style="margin-top:8px;">Other (please specify)</label>
+    <input type="text" id="otherDiet" placeholder="Any other requirements…">
+  </div>
+
+  <div class="submit-area">
+    <p class="submit-note">
+      Applications close shortly before the event.<br>
+      You'll hear back within a few days of applying.
+    </p>
+    <button class="btn-submit" onclick="handleSubmit()">
+      Submit application <span class="btn-arrow">→</span>
+    </button>
+  </div>
+
+</main>
+
+<!-- SUCCESS -->
+<div class="success-state" id="successState">
+  <div class="success-icon">✦</div>
+  <h2 class="success-title">Thank you for applying.</h2>
+  <p class="success-body">
+    We've received your application and will review it carefully.<br>
+    If selected, you'll hear from us with all the details.<br><br>
+    We hope to see you at the table.
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logos">
+    <span>Women in Experimentation</span>
+    <span>×</span>
+    <span>Convert</span>
+  </div>
+  <p class="footer-fine">This is a curated, invitation-only event. Submitting an application does not guarantee a place.</p>
+</footer>
+
+<script>
+  // Progress bar on scroll
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = (doc.scrollTop || document.body.scrollTop);
+    const total = doc.scrollHeight - doc.clientHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  function handleSubmit() {
+    // Basic validation
+    const required = ['firstName', 'lastName', 'company', 'role', 'learn', 'challenge', 'contribute'];
+    let allGood = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#B85C38';
+        el.style.boxShadow = '0 0 0 3px rgba(184,92,56,0.15)';
+        allGood = false;
+        el.addEventListener('input', () => {
+          el.style.borderColor = '';
+          el.style.boxShadow = '';
+        }, { once: true });
+      }
+    });
+    if (!allGood) {
+      document.querySelector('[style*="borderColor"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    // Show success
+    document.getElementById('formSection').style.display = 'none';
+    const s = document.getElementById('successState');
+    s.classList.add('visible');
+    s.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
